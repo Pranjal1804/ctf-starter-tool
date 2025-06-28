@@ -1,0 +1,21 @@
+FROM python:3.9-slim
+
+# Set the working directory
+WORKDIR /usr/src/app
+
+# Copy the Python scripts into the container
+COPY ../scripts/crypto/caesar.py ./scripts/crypto/
+COPY ../scripts/stego/exif_extractor.py ./scripts/stego/
+COPY ../scripts/binary/strings_extractor.py ./scripts/binary/
+COPY ../scripts/web/http_simulator.py ./scripts/web/
+COPY ../scripts/network/pcap_analyzer.py ./scripts/network/
+COPY ../scripts/osint/sherlock_search.py ./scripts/osint/
+COPY ../scripts/misc/qr_generator.py ./scripts/misc/
+
+# Install required packages
+RUN apt-get update && \
+    apt-get install -y exiftool tshark && \
+    pip install --no-cache-dir requests
+
+# Set the entrypoint for the container
+ENTRYPOINT ["python3"]

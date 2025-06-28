@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  ctf-toolkit:
+    build:
+      context: .
+      dockerfile: Dockerfile.tools
+    volumes:
+      - ./uploads:/app/uploads
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/ctf-toolkit
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
