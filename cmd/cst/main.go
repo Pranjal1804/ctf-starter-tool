@@ -303,7 +303,7 @@ var sherlockCmd = &cobra.Command{
 
         var cmdArgs []string
         cmdArgs = append(cmdArgs, "scripts/osint/sherlock_search.py", username)
-        if timeout > 0 {
+        if timeout != 5 { // Only add timeout if different from default
             cmdArgs = append(cmdArgs, "--timeout", strconv.Itoa(timeout))
         }
 
